@@ -60,8 +60,8 @@
                     <%if (OrigenImagen)
                         { %>
                     <div id="divUrl" class="mb-3" runat="server">
-                                <label for="txtUrlImagen" class="form-label">Pegue la url de la imagen</label>
-                    <asp:TextBox ID="txtUrlImagen" CssClass="form-control" OnTextChanged="txtUrlImagen_TextChanged" AutoPostBack="true" runat="server"></asp:TextBox>
+                        <label for="txtUrlImagen" class="form-label">Pegue la url de la imagen</label>
+                        <asp:TextBox ID="txtUrlImagen" CssClass="form-control" OnTextChanged="txtUrlImagen_TextChanged" AutoPostBack="true" runat="server"></asp:TextBox>
                     </div>
                     <%  }
                         else
@@ -69,12 +69,12 @@
                     <div id="divLocal" class="mb-3" runat="server">
                         <label for="fuImagenPortada" class="form-label">Seleccione la portada</label>
                         <%--<input type="file" id="imgPortada" class="form-control" runat="server" />--%>
-                        <asp:FileUpload ID="fuImagenPortada" CssClass="form-control" runat="server" />
-                        <asp:Button ID="btnCargarImagen" runat="server" CssClass="btn btn-primary mt-3" OnClick="btnCargarImagen_Click" Text="Ver imágen" />
+                        <asp:FileUpload ID="fuImagenPortada" OnChange="previewImage()" CssClass="form-control" runat="server" />
                     </div>
                     <% }  %>
 
-                    <asp:Image ID="imgCargarPortada" runat="server" Height="450px" Width="350" CssClass="img-fluid mb-3" />
+                    <%--<asp:Image ID="imgCargarPortada" runat="server" Height="450px" Width="350" CssClass="img-fluid mb-3" />--%>
+                    <img id="imgPortada" class="img-fluid mb-3" src="#" height="450" width="350" runat="server" />
                 </ContentTemplate>
             </asp:UpdatePanel>
 
@@ -90,25 +90,27 @@
 
     <%--Javascript--%>
     <script>
-        function mostrarImagenSeleccionada(input) {
-            // Verificar si se seleccionó un archivo y que el navegador soporte FileReader
-            if (true) {
+        // Función para previsualizar la imagen seleccionada en el control FileUpload antes de cargarla en el servidor
+        function previewImage() {
+            // Obtiene el control FileUpload y el control Image por sus IDs
+            var fileUpload = document.getElementById('<%= fuImagenPortada.ClientID %>');
+            var imgPerfil = document.getElementById('<%= imgPortada.ClientID %>');
 
-                // Crear una nueva instancia de FileReader
-                var raeder = new FileReader();
+            // Verifica si se ha seleccionado un archivo
+            if (fileUpload.files && fileUpload.files[0]) {
 
-                // Este callback se ejecuta cuando la lectura del archivo se completa
-                raeder.onload = function (e) {
+                // Crea un nuevo FileReader para leer el contenido del archivo
+                var reader = new FileReader();
 
-                    // Asignar la URL de datos (DataURL) al src de la imagen
-                    document.getElementById('<%=imgCargarPortada%>').src = e.target.result;
+                // Define la función que se ejecuta cuando el archivo se ha leído completamente
+                reader.onload = function (e) {
 
-                    // Mostrar la imagen estableciendo su estilo a 'block' (visible)
-                    document.getElementById('<%=imgCargarPortada%>').style.display = 'block';
-                }
+                    // Asigna el contenido leído (URL de la imagen) al control Image para previsualización
+                    imgPerfil.src = e.target.result;
+                };
 
-                // Leer el archivo seleccionado como URL de datos (DataURL)
-                raeder.readAsDataURL(input.files[0]);
+                // Lee el contenido del archivo como una URL de datos
+                reader.readAsDataURL(fileUpload.files[0]);
             }
         }
     </script>

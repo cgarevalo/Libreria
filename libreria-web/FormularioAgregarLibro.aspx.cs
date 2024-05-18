@@ -62,7 +62,7 @@ namespace libreria_web
                     ddlGenero.DataBind();
 
                     // Asigna una imagen de marcador de posición al control imgCargarPortada
-                    imgCargarPortada.ImageUrl = "https://static.vecteezy.com/system/resources/previews/016/916/479/original/placeholder-icon-design-free-vector.jpg";
+                    imgPortada.Src = "https://static.vecteezy.com/system/resources/previews/016/916/479/original/placeholder-icon-design-free-vector.jpg";
                 }
 
                 // Configuración específica si se está modificando un libro existente
@@ -112,7 +112,7 @@ namespace libreria_web
                         {
                             // Si la imagen proviene de una URL, asigna directamente la URL a la propiedad ImageUrl del control imgCargarPortada
                             case UrlLocal.URL:
-                                imgCargarPortada.ImageUrl = libroSeleccionado.ImagenPortada;
+                                imgPortada.Src = libroSeleccionado.ImagenPortada;
                                 txtUrlImagen.Text = libroSeleccionado.ImagenPortada; //carga la url de la imagen en el txtUrlImagen
                                 chkOrigen.Checked = true; // Marca el chkOrigen como seleccionado
                                 OrigenImagen = chkOrigen.Checked; // Sincroniza OrigenImagen con el estado de chkOrigen
@@ -120,7 +120,7 @@ namespace libreria_web
 
                             // Si la imagen es local, construye la URL relativa a la carpeta de imágenes en el servidor y luego asigna la URL al control imgCargarPortada
                             case UrlLocal.Local:
-                                imgCargarPortada.ImageUrl = "~/Images/Portadas/" + libroSeleccionado.ImagenPortada;
+                                imgPortada.Src = "~/Images/Portadas/" + libroSeleccionado.ImagenPortada;
                                 break;
                         }
                     }
@@ -282,7 +282,7 @@ namespace libreria_web
         // Evento para manejar el cambio en el campo de texto de la URL de la imagen
         protected void txtUrlImagen_TextChanged(object sender, EventArgs e)
         {
-            imgCargarPortada.ImageUrl = txtUrlImagen.Text;
+            imgPortada.Src = txtUrlImagen.Text;
         }
 
         // Evento para manejar el cambio en el estado del checkbox "Origen"
