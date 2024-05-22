@@ -69,6 +69,7 @@
   <ItemGroup>
     <Content Include="Default.aspx" />
     <Content Include="Error.aspx" />
+    <Content Include="Estilos\background.css" />
     <Content Include="Favoritos.aspx" />
     <Content Include="FormularioAgregarLibro.aspx" />
     <Content Include="Global.asax" />

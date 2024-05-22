@@ -12,7 +12,8 @@
                         <div class="card-body">
                             <h5 class="card-title"><%#Eval("Titulo") %></h5>
                             <p class="card-text"><%#Eval("Descripcion") %></p>
-                            <a href="#">Ver detalle</a>
+                            <a href="#" class="btn btn-info">Ver detalle</a>
+                            <asp:Button ID="btnAgregarFavorito" CssClass="btn" runat="server" Text="⭐" />
                         </div>
                     </div>
                 </div>

@@ -46,5 +46,13 @@ namespace libreria_web
             dgvLibros.PageIndex = e.NewPageIndex;
             dgvLibros.DataBind(); // Vuelve a enlazar los datos después de cambiar el índice de página para mostrar los datos de la nueva página.
         }
+
+        protected void txtFiltro_TextChanged(object sender, EventArgs e)
+        {
+            List<Libro> listaLibros = (List<Libro>)Session["listaLibros"];
+            List<Libro> listaLibrosFiltrada = listaLibros.FindAll(l => l.Titulo.ToLower().Contains(txtFiltro.Text.ToLower()));
+            dgvLibros.DataSource = listaLibrosFiltrada;
+            dgvLibros.DataBind();
+        }
     }
 }

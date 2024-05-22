@@ -5,6 +5,19 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
+    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+        <ContentTemplate>
+            <div class="row">
+                <div class="col-4">
+                    <div class="mb-3">
+                        <label for="txtFiltro" class="form-label">Filtrar por título</label>
+                        <asp:TextBox ID="txtFiltro" CssClass="form-control" AutoPostBack="true" OnTextChanged="txtFiltro_TextChanged" runat="server"></asp:TextBox>
+                    </div>
+                </div>
+            </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+
     <h3>Libros</h3>
 
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
